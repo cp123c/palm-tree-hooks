@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+
+import { useRef, useState } from 'react';
 import './App.css';
+import { useOnClickOutside } from './hooks/use-on-click-outside';
 
 function App() {
+
+  const [activeIndex, setActiveIndex] = useState(true);
+
+  // useEffect(() => {
+  //   const handler = (e) => {
+  //     if (e.key === "Escape") {
+  //       setActiveIndex(null);
+  //     }
+  //   };
+  //   document.addEventListener("keydown", handler);
+  //   return () => {
+  //     document.removeEventListener("keydown", handler);
+  //   };
+  // }, []);
+
+  const navRef = useRef(null);
+  useOnClickOutside(navRef, () => setActiveIndex(null));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" ref={navRef}>
+      {activeIndex}
     </div>
   );
 }
